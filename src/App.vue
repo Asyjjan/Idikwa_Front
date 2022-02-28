@@ -1,19 +1,25 @@
 <template>
   <v-app>
     <v-app-bar app clipped-left dense flat color="primary" dark>
-      <div class="d-flex">
-        <v-img :src="require('./assets/Logo.png')" max-height="30" max-width="30"></v-img>
-        Idikwa
-      </div>
+      <v-btn value="Accueil" to="/" text>
+        <div  value="Accueil" to="/" class="d-flex">
+          <v-img
+            :src="require('./assets/Logo.png')"
+            max-height="30"
+            max-width="30"
+          ></v-img>
+          <h4>Idikwa</h4>
+        </div>
+      </v-btn>
       <v-spacer></v-spacer>
+      <v-btn value="About" to="/About" text>A propos</v-btn>
       <v-icon dark> mdi-account-circle </v-icon>
     </v-app-bar>
 
-    <v-container></v-container>
-
-    <v-main class="text-center">
+    <v-main>
       <router-view v-on:authentifier="authentifier" />
     </v-main>
+    <v-footer> A propos</v-footer>
   </v-app>
 </template>
 
@@ -49,6 +55,6 @@ export default {
 
 <style scoped>
 .v-main {
-  background-color:#111114;
+  background-color: #111114;
 }
 </style>
