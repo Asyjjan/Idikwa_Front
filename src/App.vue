@@ -12,14 +12,13 @@
         </div>
       </v-btn>
       <v-spacer></v-spacer>
-      <v-btn value="About" to="/About" text>A propos</v-btn>
       <v-icon dark> mdi-account-circle </v-icon>
     </v-app-bar>
 
     <v-main>
       <router-view v-on:authentifier="authentifier" />
     </v-main>
-    <v-footer> A propos</v-footer>
+    <v-footer class="text-center"> A propos</v-footer>
   </v-app>
 </template>
 
