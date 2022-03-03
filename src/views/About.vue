@@ -1,8 +1,9 @@
 <template>
   <v-container dark>
-    <div class="About">Site réalisé par: Louane PRAME, Alexis SEHY, Nathan HANEN, Kévin ROSSI et Sylvio GYSONY </div>
+    <h4 class="red--text">Attention le fait d'enregistrer une personne a son insue peut-être puni par la loi</h4>
+    <p>Pour plus de détail lisez l'article 226 de Code Pénal, notament les deux extraits suivant:</p>
+    <div class="text-decoration-underline">Article 226-1 du Code pénal</div>
     <p>
-      Article 226-1 du Code pénal<br />
       Est puni d'un an d'emprisonnement et de 45 000 euros d'amende le fait, au
       moyen d'un procédé quelconque, volontairement de porter atteinte à
       l'intimité de la vie privée d'autrui : <br />
@@ -25,8 +26,8 @@
       peines sont portées à deux ans d'emprisonnement et à 60 000 euros
       d'amende.<br />
     </p>
+    <div class="text-decoration-underline"> Article 226-2 du Code pénal</div>
     <p>
-      Article 226-2 du Code pénal<br />
       Est puni des mêmes peines le fait de conserver, porter ou laisser porter à
       la connaissance du public ou d'un tiers ou d'utiliser de quelque manière
       que ce soit tout enregistrement ou document obtenu à l'aide de l'un des

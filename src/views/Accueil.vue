@@ -27,7 +27,7 @@ export default {
   data() {
     return {
       enregistrements: [
-        { nom: "test.mp3", date: "2022-02-28", duree: 10, taille: 50 , fichier:"../assets/2022-03-01 15.23.41.mp3"},
+        { nom: "test.mp3", date: "2022-02-28", duree: 10, taille: 50},
         { nom: "unautretest.mp3", date: "2022-03-01", duree: 60, taille: 600 },
       ],
     };

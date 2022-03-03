@@ -12,13 +12,29 @@
         </div>
       </v-btn>
       <v-spacer></v-spacer>
-      <v-icon dark> mdi-account-circle </v-icon>
+      
+      <v-menu offset-y>
+      <template v-slot:activator="{ on, attrs }">
+        <v-btn
+          icon
+          dark
+          v-bind="attrs"
+          v-on="on"
+        >
+          <v-icon dark> mdi-account-circle </v-icon>
+        </v-btn>
+      </template>
+      <v-list>
+        <v-list-item value="Utilisateur" to="/Utilisateur">Profil</v-list-item>
+        <v-list-item value="About" to="/About">A propos</v-list-item>
+      </v-list>
+    </v-menu>
     </v-app-bar>
 
     <v-main>
       <router-view v-on:authentifier="authentifier" />
     </v-main>
-    <v-footer class="text-center"> A propos</v-footer>
+    <v-footer class="text-center"><v-col class="font-weight-thin caption"> Site réalisé par: Louane PRAME, Alexis SEHY, Nathan HANEN, Kévin ROSSI et Sylvio GYSONY</v-col></v-footer>
   </v-app>
 </template>
 
@@ -28,7 +44,6 @@ export default {
   name: "App",
   data() {
     return {
-      drawer: true,
       authentification: variables.authentifie,
       autorisation: variables.autorisation,
     };
