@@ -1,5 +1,5 @@
 <template>
-  <v-app>
+<v-app>
     <v-app-bar app clipped-left dense flat color="primary" dark>
       <v-btn value="Accueil" to="/" text>
         <div  value="Accueil" to="/" class="d-flex">
@@ -27,48 +27,55 @@
       <v-list>
         <v-list-item value="Utilisateur" to="/Utilisateur">Profil</v-list-item>
         <v-list-item value="About" to="/About">A propos</v-list-item>
+        <v-list-item v-if="authenticated" to="/login" v-on:click.native="logout()" replace>Deconnexion</v-list-item>
       </v-list>
     </v-menu>
     </v-app-bar>
 
     <v-main>
-      <router-view v-on:authentifier="authentifier" />
+      <router-view @authenticated="setAuthenticated" />
     </v-main>
     <v-footer class="text-center"><v-col class="font-weight-thin caption"> Site réalisé par: Louane PRAME, Alexis SEHY, Nathan HANEN, Kévin ROSSI et Sylvio GYSONY</v-col></v-footer>
   </v-app>
 </template>
 
 <script>
-import { variables } from "./plugins/fonctions";
-export default {
-  name: "App",
-  data() {
-    return {
-      authentification: variables.authentifie,
-      autorisation: variables.autorisation,
-    };
-  },
-  methods: {
-    deconnexion() {
-      variables.authentifie = false;
-      this.$router.push("/Connexion");
-      this.authentification = false;
-      this.autorisation = "";
-    },
-    authentifier() {
-      this.authentification = variables.authentifie;
-      this.autorisation = variables.autorisation;
-    },
-  },
-  mounted() {
-    this.authentification = variables.authentifie;
-    this.autorisation = variables.autorisation;
-  },
-};
+    export default {
+        name: 'App',
+        data() {
+            return {
+                authenticated: false,
+                mockAccount: {
+                    username: "root",
+                    password: "root"
+                }
+            }
+        },
+        mounted() {
+            if(!this.authenticated) {
+                this.$router.replace({ name: "login" });
+            }
+        },
+        methods: {
+            setAuthenticated(status) {
+                this.authenticated = status;
+            },
+            logout() {
+                this.authenticated = false;
+            }
+        }
+    }
 </script>
 
-<style scoped>
-.v-main {
-  background-color: #111114;
-}
+<style>
+    body {
+        background-color: #F0F0F0;
+    }
+    h1 {
+        padding: 0;
+        margin-top: 0;
+    }
+    .v-main {
+      background-color: #111114;
+    }
 </style>

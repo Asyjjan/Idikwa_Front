@@ -1,46 +1,40 @@
-import Vue from "vue";
-import VueRouter from "vue-router";
+import Vue from 'vue'
+import VueRouter from 'vue-router'
 
-Vue.use(VueRouter);
+Vue.use(VueRouter)
 
-const routes = [
-  {
-    path: "/About",
-    name: "About",
-    component: () => import("../views/About.vue"),
-  },
-  {
-    path: "/TestApi",
-    name: "TestApi",
-    component: () => import("../views/TestApi.vue"),
-  },
-  {
-    path: "/",
-    name: "Accueil",
-    component: () => import("../views/Accueil.vue"),
-  },
-  {
-    path: "/Utilisateur",
-    name: "Utilisateur",
-    component: () => import("../views/Utilisateur.vue"),
-  },
-];
-
-const router = new VueRouter({
-  routes,
-});
-/*router.beforeEach((to, from, next) => {
-  if (to.path.startsWith("/Connexion")) {
-    next();
-  } else {
-    if (!variables.authentifie) {
-      next({
-        path: "/Connexion",
-        params: { nextUrl: to.fullPath },
-      });
-    } else {
-      next();
-    }
-  }
-});*/
-export default router;
+export default new VueRouter({
+    routes: [
+        {
+            path: '/',
+            redirect: {
+                name: "login"
+            }
+        },
+        {
+            path: "/login",
+            name: "login",
+            component: () => import("../views/login.vue"),
+        },
+        {
+            path: "/Accueil",
+            name: "Accueil",
+            component: () => import("../views/Accueil.vue"),
+        },
+        {
+            path: "/Utilisateur",
+            name: "Utilisateur",
+            component: () => import("../views/Utilisateur.vue"),
+        },
+        {
+            path: "/About",
+            name: "About",
+            component: () => import("../views/About.vue"),
+        },
+        {
+            path: "/TestApi",
+            name: "TestApi",
+            component: () => import("../views/TestApi.vue"),
+        },
+    ]
+})
