@@ -1,8 +1,8 @@
 <template>
 <v-app>
     <v-app-bar app clipped-left dense flat color="primary" dark>
-      <v-btn value="Accueil" to="/" text>
-        <div  value="Accueil" to="/" class="d-flex">
+      <v-btn value="Accueil" to="/Accueil" text>
+        <div class="d-flex">
           <v-img
             :src="require('./assets/Logo.png')"
             max-height="30"
@@ -25,9 +25,9 @@
         </v-btn>
       </template>
       <v-list>
-        <v-list-item value="Utilisateur" to="/Utilisateur">Profil</v-list-item>
-        <v-list-item value="About" to="/About">A propos</v-list-item>
-        <v-list-item v-if="authenticated" to="/login" v-on:click.native="logout()" replace>Deconnexion</v-list-item>
+        <v-list-item value="Utilisateur" to="/Utilisateur"><v-icon color="blue">mdi-account-circle</v-icon> Profil</v-list-item>
+        <v-list-item value="About" to="/About"><v-icon color="blue">mdi-information-outline</v-icon> A propos</v-list-item>
+        <v-list-item v-if="authenticated" to="/login" v-on:click.native="logout()" replace> <v-icon color="error">mdi-power-standby</v-icon>Deconnexion</v-list-item>
       </v-list>
     </v-menu>
     </v-app-bar>

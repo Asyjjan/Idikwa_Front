@@ -1,10 +1,27 @@
 <template>
-    <div id="login">
-        <h1>Login</h1>
-        <input type="text" name="username" v-model="input.username" placeholder="Username" />
-        <input type="password" name="password" v-model="input.password" placeholder="Password" />
-        <button type="button" v-on:click="login()">Login</button>
-    </div>
+    <v-container class="d-flex">
+        <v-sheet height="100%" width="40%" color="#111114"></v-sheet>
+        <v-sheet max-height="300" max-width="300" class="text-center pa-3">
+            <h3>Connexion</h3>
+            <v-text-field label="Nom d'utilisateur" v-model="input.username"></v-text-field>
+            <v-text-field label="Mot de passe" v-model="input.password" type="password"></v-text-field>
+            <v-btn @click="login()" color="grey darken-3">Connexion</v-btn>
+        </v-sheet>
+        <v-snackbar v-model="snak_visible"
+        >{{ snakbar_text }}
+            <template v-slot:action="{ attrs }">
+                <v-btn
+                color="primary"
+                text
+                timeout="5100"
+                v-bind="attrs"
+                @click="snak_visible = false"
+                >
+                Fermer
+                </v-btn>
+            </template>
+        </v-snackbar>
+    </v-container>
 </template>
 
 <script>
@@ -14,7 +31,9 @@
             return {
                 input: {
                     username: "",
-                    password: ""
+                    password: "",
+                    snackbarVisible:false,
+                    snakbar_text:"",
                 }
             }
         },
@@ -26,23 +45,24 @@
                         this.$router.replace({ name: "Accueil" });
                     } else {
                         console.log("The username and / or password is incorrect");
+                        this.snackbarVisible("Le nom d'utilisateur ou le mot de passe sont incorrect.")
                     }
                 } else {
                     console.log("A username and password must be present");
+                    this.snackbarVisible("Veuillez remplir tous les champs.")
                 }
-            }
+            },
+            snackbarVisible(text) {
+                this.snakbar_text = text;
+                this.snak_visible = true;
+            },
         }
     }
 </script>
 
 <style scoped>
-    #login {
-        width: 500px;
-        border: 1px solid #CCCCCC;
-        background-color: #FFFFFF;
+    #v-sheet {
         margin: auto;
         margin-top: 200px;
-        padding: 20px;
-        color: black;
     }
 </style>
