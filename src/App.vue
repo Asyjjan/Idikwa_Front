@@ -1,5 +1,5 @@
 <template>
-<v-app>
+  <v-app>
     <v-app-bar app clipped-left dense flat color="primary" dark>
       <v-btn value="Accueil" to="/Accueil" text>
         <div class="d-flex">
@@ -12,70 +12,84 @@
         </div>
       </v-btn>
       <v-spacer></v-spacer>
-      
+
       <v-menu offset-y>
-      <template v-slot:activator="{ on, attrs }">
-        <v-btn
-          icon
-          dark
-          v-bind="attrs"
-          v-on="on"
-        >
-          <v-icon dark> mdi-account-circle </v-icon>
-        </v-btn>
-      </template>
-      <v-list>
-        <v-list-item value="Utilisateur" to="/Utilisateur"><v-icon color="blue">mdi-account-circle</v-icon> Profil</v-list-item>
-        <v-list-item value="About" to="/About"><v-icon color="blue">mdi-information-outline</v-icon> A propos</v-list-item>
-        <v-list-item v-if="authenticated" to="/login" v-on:click.native="logout()" replace> <v-icon color="error">mdi-power-standby</v-icon>Deconnexion</v-list-item>
-      </v-list>
-    </v-menu>
+        <template v-slot:activator="{ on, attrs }">
+          <v-btn icon dark v-bind="attrs" v-on="on">
+            <v-icon dark> mdi-account-circle </v-icon>
+          </v-btn>
+        </template>
+        <v-list>
+          <v-list-item value="Utilisateur" to="/Utilisateur"
+            ><v-icon color="blue">mdi-account-circle</v-icon>
+            Profil</v-list-item
+          >
+          <v-list-item value="About" to="/About"
+            ><v-icon color="blue">mdi-information-outline</v-icon> A
+            propos</v-list-item
+          >
+          <v-list-item
+            v-if="authenticated"
+            to="/login"
+            v-on:click.native="logout()"
+            replace
+          >
+            <v-icon color="error">mdi-power-standby</v-icon
+            >Deconnexion</v-list-item
+          >
+        </v-list>
+      </v-menu>
     </v-app-bar>
 
     <v-main>
       <router-view @authenticated="setAuthenticated" />
     </v-main>
-    <v-footer class="text-center"><v-col class="font-weight-thin caption"> Site réalisé par: Louane PRAME, Alexis SEHY, Nathan HANEN, Kévin ROSSI et Sylvio GYSONY</v-col></v-footer>
+    <v-footer class="text-center"
+      ><v-col class="font-weight-thin caption">
+        Site réalisé par: Louane PRAME, Alexis SEHY, Nathan HANEN, Kévin ROSSI
+        et Sylvio GYSONY</v-col
+      ></v-footer
+    >
   </v-app>
 </template>
 
 <script>
-    export default {
-        name: 'App',
-        data() {
-            return {
-                authenticated: false,
-                mockAccount: {
-                    username: "root",
-                    password: "root"
-                }
-            }
-        },
-        mounted() {
-            if(!this.authenticated) {
-                this.$router.replace({ name: "login" });
-            }
-        },
-        methods: {
-            setAuthenticated(status) {
-                this.authenticated = status;
-            },
-            logout() {
-                this.authenticated = false;
-            }
-        }
+export default {
+  name: "App",
+  data() {
+    return {
+      authenticated: false,
+      mockAccount: {
+        username: "root",
+        password: "root",
+      },
+    };
+  },
+  mounted() {
+    if (!this.authenticated) {
+      this.$router.replace({ name: "login" });
     }
+  },
+  methods: {
+    setAuthenticated(status) {
+      this.authenticated = status;
+    },
+    logout() {
+      this.authenticated = false;
+    },
+  },
+};
 </script>
 
 <style>
-    body {
-        background-color: #F0F0F0;
-    }
-    h1 {
-        padding: 0;
-        margin-top: 0;
-    }
-    .v-main {
-      background-color: #111114;
-    }
+body {
+  background-color: #f0f0f0;
+}
+h1 {
+  padding: 0;
+  margin-top: 0;
+}
+.v-main {
+  background-color: #111114;
+}
 </style>
