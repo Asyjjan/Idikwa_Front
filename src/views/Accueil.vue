@@ -9,7 +9,7 @@
       color="white"
       class="ml-0 pl-0 mt-15"
     ></v-sheet>
-    <div v-for="(audio, e) in audios" :key="e + 50">
+    <div v-for="(audio, a) in audios" :key="a.id">
       <div class="d-flex">
         <v-col
           ><h4>{{ audio.title }}</h4></v-col
@@ -20,10 +20,13 @@
         </v-col>
         <v-col class="text-right"
           >Durée: {{ audio.duree }}s / Taille: {{ audio.taille }}Ko
+          <v-btn icon @click="download(audio.id)">
+            <v-icon color="white">mdi-download</v-icon>
+          </v-btn>
           <v-btn icon>
             <v-icon color="blue">mdi-export-variant</v-icon>
           </v-btn>
-          <v-btn icon>
+          <v-btn icon @click="deleteAudio(audio.id)">
             <v-icon color="error">mdi-delete</v-icon>
           </v-btn>
         </v-col>
@@ -39,7 +42,11 @@
 </template>
 
 <script>
-import { findAllAudios } from "../services/audioService";
+import {
+  findAllAudios,
+  deleteAudio,
+  downloadAudio,
+} from "../services/audioService";
 // @ is an alias to /src
 export default {
   name: "About",
@@ -51,6 +58,16 @@ export default {
   methods: {
     getAudioUrl: function (audio) {
       return "http://localhost:3000/api/audios/" + audio.id; // Requête pour récupérer un seul audio
+    },
+    deleteAudio: async function (id) {
+      try {
+        await deleteAudio(id);
+      } catch (ex) {
+        console.log(ex);
+      }
+    },
+    download: async function (id) {
+      downloadAudio(id);
     },
   },
   async mounted() {

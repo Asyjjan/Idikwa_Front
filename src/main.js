@@ -11,7 +11,6 @@ import "@mdi/font/css/materialdesignicons.css";
 
 Vue.config.productionTip = false;
 Vue.use(VueAxios, axios);
-
 new Vue({
   router,
   store,

@@ -1,9 +1,7 @@
 import axios from "axios";
 import auth from "./authService";
-import { toast } from "react-toastify";
-
-axios.defaults.baseURL = "http://localhost:3000/api";
-
+import config from "../config.json";
+axios.defaults.baseURL = config.apiBaseUrl;
 axios.interceptors.response.use(null, (error) => {
   const expectedError =
     error.response &&
@@ -11,7 +9,7 @@ axios.interceptors.response.use(null, (error) => {
     error.response.status < 500;
 
   if (!expectedError) {
-    toast.error("An unexpected error occured.");
+    console.error("An unexpected error occured.");
   }
 
   return Promise.reject(error);
