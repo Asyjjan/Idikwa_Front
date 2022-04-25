@@ -12,10 +12,7 @@
           ></v-img>
         </v-card-title>
         <v-card-text>
-          <v-text-field
-            label="Nom d'utilisateur"
-            v-model="input.username"
-          ></v-text-field>
+          <v-text-field label="Email" v-model="input.email"></v-text-field>
           <v-text-field
             label="Mot de passe"
             v-model="input.password"
@@ -49,7 +46,7 @@ export default {
   data() {
     return {
       input: {
-        username: "",
+        email: "",
         password: "",
       },
       dialogueConnexion: false,
@@ -63,15 +60,13 @@ export default {
     },
     async login() {
       try {
-        await login(this.input.username, this.input.password);
+        await login(this.input.email, this.input.password);
         this.$router.replace({ name: "Accueil" });
         this.dialogueConnexion = false;
       } catch (ex) {
-        this.snackbarVisible(
-          "Le nom d'utilisateur ou le mot de passe sont incorrect."
-        );
+        this.snackbarVisible("L'email ou le mot de passe sont incorrect.");
       }
-      if (this.input.username == "" || this.input.password == "") {
+      if (this.input.email == "" || this.input.password == "") {
         this.snackbarVisible("Veuillez remplir tous les champs.");
       }
     },
