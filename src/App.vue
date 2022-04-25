@@ -54,7 +54,7 @@
 </template>
 
 <script>
-import { getCurrentUser } from "./services/authService";
+import { getCurrentUser, logout } from "./services/authService";
 export default {
   name: "App",
   data() {
@@ -68,17 +68,17 @@ export default {
   },
   mounted() {
     this.authenticated = getCurrentUser();
-    console.log(this.authenticated);
     if (!this.authenticated) {
       this.$router.replace({ name: "login" });
     }
   },
   methods: {
+    logout() {
+      logout();
+      this.$router.replace({ name: "login" });
+    },
     setAuthenticated(status) {
       this.authenticated = status;
-    },
-    logout() {
-      this.authenticated = false;
     },
   },
 };

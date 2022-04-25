@@ -9,21 +9,17 @@
       color="white"
       class="ml-0 pl-0 mt-15"
     ></v-sheet>
-    <div v-for="(unEnregistrement, e) in enregistrements" :key="e + 50">
+    <div v-for="(audio, e) in audios" :key="e + 50">
       <div class="d-flex">
         <v-col
-          ><h4>{{ unEnregistrement.nom }}</h4></v-col
+          ><h4>{{ audio.title }}</h4></v-col
         >
-        <v-col class="text-center">Date: {{ unEnregistrement.date }}</v-col>
+        <v-col class="text-center">Date: {{ audio.createdAt }}</v-col>
         <v-col>
-          <audio controls :src="require('../assets/'+unEnregistrement.nom)">
-            Your browser does not support the
-            <code>audio</code> element.
-          </audio></v-col
-        >
+          <audio controls :src="getAudioUrl(audio)"></audio>
+        </v-col>
         <v-col class="text-right"
-          >Durée: {{ unEnregistrement.duree }}s / Taille:
-          {{ unEnregistrement.taille }}Ko
+          >Durée: {{ audio.duree }}s / Taille: {{ audio.taille }}Ko
           <v-btn icon>
             <v-icon color="blue">mdi-export-variant</v-icon>
           </v-btn>
@@ -43,17 +39,23 @@
 </template>
 
 <script>
+import { findAllAudios } from "../services/audioService";
 // @ is an alias to /src
 export default {
   name: "About",
   data() {
     return {
-      enregistrements: [
-        { nom: "KH3_TheAfternoonStreet.mp3", date: "2022-02-28", duree: 10, taille: 50 },
-      ],
+      audios: [],
     };
   },
-  methods: {},
-  mounted() {},
+  methods: {
+    getAudioUrl: function (audio) {
+      return "http://localhost:3000/api/audios/" + audio.id; // Requête pour récupérer un seul audio
+    },
+  },
+  async mounted() {
+    const { data } = await findAllAudios();
+    this.audios = data;
+  },
 };
 </script>

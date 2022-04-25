@@ -19,6 +19,7 @@
             type="password"
           ></v-text-field>
           <v-btn @click="login()" color="grey darken-3">Connexion</v-btn>
+          <router-link :to="`/register`">Inscription</router-link>
         </v-card-text>
       </v-card>
     </v-dialog>
@@ -40,7 +41,7 @@
 </template>
 
 <script>
-import { login } from "../services/authService";
+import { getCurrentUser, login } from "../services/authService";
 export default {
   name: "Login",
   data() {
@@ -76,6 +77,7 @@ export default {
     },
   },
   mounted() {
+    if (getCurrentUser() !== null) this.$router.replace({ name: "Accueil" });
     this.initialiser();
   },
 };
