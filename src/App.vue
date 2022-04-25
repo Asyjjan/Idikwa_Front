@@ -54,11 +54,12 @@
 </template>
 
 <script>
+import { getCurrentUser } from "./services/authService";
 export default {
   name: "App",
   data() {
     return {
-      authenticated: false,
+      authenticated: null,
       mockAccount: {
         username: "root",
         password: "root",
@@ -66,6 +67,8 @@ export default {
     };
   },
   mounted() {
+    this.authenticated = getCurrentUser();
+    console.log(this.authenticated);
     if (!this.authenticated) {
       this.$router.replace({ name: "login" });
     }

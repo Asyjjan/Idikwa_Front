@@ -2,8 +2,8 @@
   <v-container class="d-flex">
     <v-dialog v-model="dialogueConnexion" persistent width="500px">
       <v-card>
-        <v-card-title> 
-          Connexion 
+        <v-card-title>
+          Connexion
           <v-spacer></v-spacer>
           <v-img
             :src="require('../assets/Logo.png')"
@@ -43,6 +43,7 @@
 </template>
 
 <script>
+import { login } from "../services/authService";
 export default {
   name: "Login",
   data() {
@@ -57,23 +58,20 @@ export default {
     };
   },
   methods: {
-    initiliser() {
+    initialiser() {
       this.dialogueConnexion = true;
     },
-    login() {
-      if (this.input.username != "" && this.input.password != "") {
-        if (this.input.username == "root" && this.input.password == "root") {
-          this.$emit("authenticated", true);
-          this.$router.replace({ name: "Accueil" });
-          this.dialogueConnexion = false;
-        } else {
-          console.log("The username and / or password is incorrect");
-          this.snackbarVisible(
-            "Le nom d'utilisateur ou le mot de passe sont incorrect."
-          );
-        }
-      } else {
-        console.log("A username and password must be present");
+    async login() {
+      try {
+        await login(this.input.username, this.input.password);
+        this.$router.replace({ name: "Accueil" });
+        this.dialogueConnexion = false;
+      } catch (ex) {
+        this.snackbarVisible(
+          "Le nom d'utilisateur ou le mot de passe sont incorrect."
+        );
+      }
+      if (this.input.username == "" || this.input.password == "") {
         this.snackbarVisible("Veuillez remplir tous les champs.");
       }
     },
@@ -83,7 +81,7 @@ export default {
     },
   },
   mounted() {
-    this.initiliser();
+    this.initialiser();
   },
 };
 </script>
