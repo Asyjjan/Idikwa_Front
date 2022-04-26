@@ -9,7 +9,7 @@
       C'est ici pour devenir Premium
       <v-btn @click="premium = 1">Clique ici</v-btn>
     </div>
-    <h2 class="text-center">Sandbox personnel</h2>
+    <h2 class="text-center">Voici tous vos enregistrements upload</h2>
     <v-sheet
       height="1"
       width="100%"
@@ -21,26 +21,19 @@
         <v-col
           ><h4>{{ audio.title }}</h4></v-col
         >
-<<<<<<< HEAD
         <v-col class="text-center"
           >Date: {{ formatDate(audio.createdAt) }}</v-col
         >
-=======
-        <v-col class="text-center">Date: {{ audio.createdAt | formatDate }}</v-col>
->>>>>>> f429ab2306b42f2ddf961d52bb744e40b80851d8
         <v-col>
           <audio controls :src="getAudioUrl(audio)"></audio>
         </v-col>
         <v-col class="text-right">
-          Taille: {{ Math.trunc(audio.size) }}Ko
+          Taille: {{ audio.size }}Ko
           <v-btn icon @click="download(audio.id)">
             <v-icon color="white">mdi-download</v-icon>
           </v-btn>
           <v-btn icon>
             <v-icon color="blue">mdi-export-variant</v-icon>
-          </v-btn>
-          <v-btn icon @click="saveAudio(audio)">
-            <v-icon color="yellow">mdi-tooltip-edit</v-icon>
           </v-btn>
           <v-btn icon @click="deleteAudio(audio.id)">
             <v-icon color="error">mdi-delete</v-icon>
@@ -59,13 +52,11 @@
 
 <script>
 import {
-  //findAllMyAudios,
-  findAllAudios,
+  findAllMyAudios,
   deleteAudio,
   downloadAudio,
-  saveAudio,
 } from "../services/audioService";
-//import { getCurrentUser } from "../services/authService";
+import { getCurrentUser } from "../services/authService";
 // @ is an alias to /src
 export default {
   name: "About",
@@ -90,29 +81,15 @@ export default {
     download: async function (id) {
       downloadAudio(id);
     },
-<<<<<<< HEAD
     formatDate: function (date) {
       return new Date(date).toISOString().slice(0, 19).replace("T", " ");
     },
-=======
-    saveAudio: function (file){
-      try{
-        let audio = this.audios.filter(a=>a.id===file.id)[0]; // marche pas
-        audio.title = "test";
-        saveAudio(audio);
-      }catch (ex) {
-        console.log(ex);
-      }
-    }
->>>>>>> f429ab2306b42f2ddf961d52bb744e40b80851d8
   },
   async mounted() {
-   // const user = getCurrentUser();
-   // this.username = user.username;
-    //this.premium = user.premium;
-    //const { data } = await findAllMyAudios();
-    //this.audios = data;
-    const { data } = await findAllAudios();
+    const user = getCurrentUser();
+    this.username = user.username;
+    this.premium = user.premium;
+    const { data } = await findAllMyAudios();
     this.audios = data;
   },
 };

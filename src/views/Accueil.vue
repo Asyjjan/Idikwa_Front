@@ -1,6 +1,6 @@
 <template>
   <v-container dark>
-    <h2 class="text-center">Sandbox public</h2>
+    <h2 class="text-center">Voici tous les enregistrements publics upload</h2>
     <v-sheet
       height="1"
       width="100%"
@@ -12,22 +12,14 @@
         <v-col
           ><h4>{{ audio.title }}</h4></v-col
         >
-<<<<<<< HEAD
         <v-col class="text-center"
           >Date: {{ formatDate(audio.createdAt) }}</v-col
         >
-=======
-        <v-col class="text-center">Date: {{ audio.createdAt | formatDate }}</v-col>
->>>>>>> f429ab2306b42f2ddf961d52bb744e40b80851d8
         <v-col>
           <audio controls :src="getAudioUrl(audio)"></audio>
         </v-col>
         <v-col class="text-right">
-<<<<<<< HEAD
           Taille: {{ Math.trunc(audio.size) }}Ko
-=======
-          Durée: ND / Taille: ND
->>>>>>> f429ab2306b42f2ddf961d52bb744e40b80851d8
           <v-btn icon @click="download(audio.id)">
             <v-icon color="white">mdi-download</v-icon>
           </v-btn>
