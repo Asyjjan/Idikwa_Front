@@ -18,8 +18,8 @@
             v-model="input.password"
             type="password"
           ></v-text-field>
-          <v-btn @click="login()" color="grey darken-3">Connexion</v-btn>
-          <router-link :to="`/register`">Inscription</router-link>
+          <v-btn @click="login()" color="grey darken-3 mr-2">Connexion</v-btn>
+          <router-link :to="`/register`" class="lien">Inscription</router-link>
         </v-card-text>
       </v-card>
     </v-dialog>
@@ -87,5 +87,8 @@ export default {
 #v-sheet {
   margin: auto;
   margin-top: 200px;
+}
+#lien{
+  text-decoration-color: blue;
 }
 </style>
