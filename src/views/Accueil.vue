@@ -1,8 +1,6 @@
 <template>
   <v-container dark>
-    <h2 class="text-center">
-      Voici tous vos enregistrements qui ont été upload
-    </h2>
+    <h2 class="text-center">Voici tous les enregistrements publics upload</h2>
     <v-sheet
       height="1"
       width="100%"
@@ -26,9 +24,6 @@
           <v-btn icon>
             <v-icon color="blue">mdi-export-variant</v-icon>
           </v-btn>
-          <v-btn icon @click="deleteAudio(audio.id)">
-            <v-icon color="error">mdi-delete</v-icon>
-          </v-btn>
         </v-col>
       </div>
       <v-sheet
@@ -42,11 +37,7 @@
 </template>
 
 <script>
-import {
-  findAllAudios,
-  deleteAudio,
-  downloadAudio,
-} from "../services/audioService";
+import { findAllAudios, downloadAudio } from "../services/audioService";
 // @ is an alias to /src
 export default {
   name: "About",
@@ -59,13 +50,7 @@ export default {
     getAudioUrl: function (audio) {
       return "http://localhost:3000/api/audios/" + audio.id; // Requête pour récupérer un seul audio
     },
-    deleteAudio: async function (id) {
-      try {
-        await deleteAudio(id);
-      } catch (ex) {
-        console.log(ex);
-      }
-    },
+
     download: async function (id) {
       downloadAudio(id);
     },

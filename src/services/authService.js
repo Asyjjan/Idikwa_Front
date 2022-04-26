@@ -11,10 +11,12 @@ setTimeout(() => {
 export async function login(email, password) {
   const { data: token } = await http.post(apiUrl, { email, password });
   localStorage.setItem(tokenKey, token);
+  http.setJWT(getJWT());
 }
 
 export function loginWithJWT(token) {
   localStorage.setItem(tokenKey, token);
+  http.setJWT(getJWT());
 }
 
 export function logout() {
