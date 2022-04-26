@@ -23,7 +23,7 @@
             v-model="input.password"
             type="password"
           ></v-text-field>
-          <v-btn @click="register()" color="grey darken-3">Inscription</v-btn>
+          <v-btn @click="register()" color="grey darken-3 mr-2">Inscription</v-btn>
           <router-link :to="`/login`">Déjà un compte ?</router-link>
         </v-card-text>
       </v-card>
