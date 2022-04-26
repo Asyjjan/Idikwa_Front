@@ -21,12 +21,14 @@
         <v-col
           ><h4>{{ audio.title }}</h4></v-col
         >
-        <v-col class="text-center">Date: {{ audio.createdAt }}</v-col>
+        <v-col class="text-center"
+          >Date: {{ formatDate(audio.createdAt) }}</v-col
+        >
         <v-col>
           <audio controls :src="getAudioUrl(audio)"></audio>
         </v-col>
-        <v-col class="text-right"
-          >Durée: {{ audio.duree }}s / Taille: {{ audio.taille }}Ko
+        <v-col class="text-right">
+          Taille: {{ Math.trunc(audio.size) }}Ko
           <v-btn icon @click="download(audio.id)">
             <v-icon color="white">mdi-download</v-icon>
           </v-btn>
@@ -78,6 +80,9 @@ export default {
     },
     download: async function (id) {
       downloadAudio(id);
+    },
+    formatDate: function (date) {
+      return new Date(date).toISOString().slice(0, 19).replace("T", " ");
     },
   },
   async mounted() {
