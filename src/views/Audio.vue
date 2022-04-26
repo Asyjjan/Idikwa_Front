@@ -33,7 +33,7 @@
           <v-btn icon>
             <v-icon color="blue">mdi-export-variant</v-icon>
           </v-btn>
-          <v-btn icon @click="saveAudio(audio)">
+          <v-btn icon @click="updateAudio(audio.id)">
             <v-icon color="yellow">mdi-tooltip-edit</v-icon>
           </v-btn>
           <v-btn icon @click="deleteAudio(audio.id)">
@@ -56,6 +56,7 @@ import {
   //findAllMyAudios,
   findAllAudios,
   deleteAudio,
+  loadAudio,
   downloadAudio,
   saveAudio,
 } from "../services/audioService";
@@ -84,14 +85,10 @@ export default {
     download: async function (id) {
       downloadAudio(id);
     },
-    saveAudio: function (file){
-      try{
-        let audio = this.audios.filter(a=>a.id===file.id)[0]; // marche pas
-        audio.title = "test";
-        saveAudio(audio);
-      }catch (ex) {
-        console.log(ex);
-      }
+    saveAudio: async function (id){
+      let file = loadAudio(id);
+      file.name = "test";
+      saveAudio(file);
     }
   },
   async mounted() {
