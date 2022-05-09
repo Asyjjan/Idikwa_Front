@@ -44,7 +44,3 @@ You can install the API by [this link.](https://github.com/kevinrossi-iut/Idikwa
 ## Running the project
 
     $ yarn start
-
-## Running the tests
-
-    $ yarn test
