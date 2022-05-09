@@ -1,14 +1,6 @@
 <template>
   <v-container dark>
     <h2 class="text-center">Votre profil {{ username }}</h2>
-    <div v-if="premium == 1">
-      <h4>Vous êtes Premium</h4>
-    </div>
-    <div v-else>
-      <h4>Vous n'êtes par encore Premium</h4>
-      C'est ici pour devenir Premium
-      <v-btn @click="premium = 1">Clique ici</v-btn>
-    </div>
     <h2 class="text-center">Voici tous vos enregistrements upload</h2>
     <v-sheet
       height="1"
