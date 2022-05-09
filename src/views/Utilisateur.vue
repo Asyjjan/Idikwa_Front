@@ -32,7 +32,7 @@
           <v-btn icon @click="download(audio.id)">
             <v-icon color="white">mdi-download</v-icon>
           </v-btn>
-          <v-btn icon>
+          <v-btn icon @click="getLink(audio.id)">
             <v-icon color="blue">mdi-export-variant</v-icon>
           </v-btn>
           <v-btn icon @click="deleteAudio(audio.id)">
@@ -57,6 +57,8 @@ import {
   downloadAudio,
 } from "../services/audioService";
 import { getCurrentUser } from "../services/authService";
+import config from "../config.json";
+
 // @ is an alias to /src
 export default {
   name: "About",
@@ -69,8 +71,9 @@ export default {
   },
   methods: {
     getAudioUrl: function (audio) {
-      return "http://localhost:3000/api/audios/" + audio.id; // Requête pour récupérer un seul audio
+      return config.apiBaseUrl + "/audios/" + audio.id; // Requête pour récupérer un seul audio
     },
+
     deleteAudio: async function (id) {
       try {
         await deleteAudio(id);
@@ -80,6 +83,16 @@ export default {
     },
     download: async function (id) {
       downloadAudio(id);
+    },
+    getLink: function (id) {
+      navigator.clipboard.writeText(`${config.apiBaseUrl}/audios/${id}`).then(
+        () => {
+          alert("Copied");
+        },
+        (error) => {
+          alert(error);
+        }
+      );
     },
     formatDate: function (date) {
       return new Date(date).toISOString().slice(0, 19).replace("T", " ");

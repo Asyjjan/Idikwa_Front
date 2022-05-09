@@ -41,6 +41,7 @@
 
 <script>
 import { findAllAudios, downloadAudio } from "../services/audioService";
+import config from "../config.json";
 // @ is an alias to /src
 export default {
   name: "About",
@@ -51,7 +52,7 @@ export default {
   },
   methods: {
     getAudioUrl: function (audio) {
-      return "http://localhost:3000/api/audios/" + audio.id; // Requête pour récupérer un seul audio
+      return config.apiBaseUrl + "/audios/" + audio.id; // Requête pour récupérer un seul audio
     },
 
     download: async function (id) {
@@ -61,16 +62,14 @@ export default {
       return new Date(date).toISOString().slice(0, 19).replace("T", " ");
     },
     getLink: function (id) {
-      navigator.clipboard
-        .writeText(`http://45.90.162.79:3000/api/audios/${id}`)
-        .then(
-          () => {
-            alert("Copied");
-          },
-          (error) => {
-            alert(error);
-          }
-        );
+      navigator.clipboard.writeText(`${config.apiBaseUrl}/audios/${id}`).then(
+        () => {
+          alert("Copied");
+        },
+        (error) => {
+          alert(error);
+        }
+      );
     },
   },
   async mounted() {
