@@ -36,10 +36,5 @@ export default new VueRouter({
       name: "About",
       component: () => import("../views/About.vue"),
     },
-    {
-      path: "/TestApi",
-      name: "TestApi",
-      component: () => import("../views/TestApi.vue"),
-    },
   ],
 });

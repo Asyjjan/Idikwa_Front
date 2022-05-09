@@ -10,7 +10,8 @@
     <div v-for="(audio, a) in audios" :key="a.id">
       <div class="d-flex">
         <v-col
-          ><h4>{{ audio.title }}</h4></v-col
+          ><h4>{{ audio.title }}</h4>
+          <p>{{ audio.description }}</p></v-col
         >
         <v-col class="text-center"
           >Date: {{ formatDate(audio.createdAt) }}</v-col
