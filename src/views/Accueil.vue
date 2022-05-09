@@ -23,7 +23,7 @@
           <v-btn icon @click="download(audio.id)">
             <v-icon color="white">mdi-download</v-icon>
           </v-btn>
-          <v-btn icon>
+          <v-btn icon @click="getLink(audio.id)">
             <v-icon color="blue">mdi-export-variant</v-icon>
           </v-btn>
         </v-col>
@@ -58,6 +58,18 @@ export default {
     },
     formatDate: function (date) {
       return new Date(date).toISOString().slice(0, 19).replace("T", " ");
+    },
+    getLink: function (id) {
+      navigator.clipboard
+        .writeText(`http://45.90.162.79:3000/api/audios/${id}`)
+        .then(
+          () => {
+            alert("Copied");
+          },
+          (error) => {
+            alert(error);
+          }
+        );
     },
   },
   async mounted() {
